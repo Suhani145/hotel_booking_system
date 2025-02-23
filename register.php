@@ -9,11 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!$name || !$email || !$password) {
         die("Error: All fields are required.");
     }
-
-    // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
-    // Insert user
     $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $name, $email, $hashedPassword);
 
